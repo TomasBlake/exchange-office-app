@@ -16,7 +16,7 @@ app.get("/api/exchange-rates", async (req: Request, res: Response) => {
    
     const url = process.env.CNB_API || "";
 
-    const response = await fetch("https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt");
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error("Network response was not ok: " + response.statusText);
