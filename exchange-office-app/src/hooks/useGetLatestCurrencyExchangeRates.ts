@@ -11,6 +11,6 @@ export const useGetLatestCurrencyExchangeRates = () =>
       apiFetch({
         path: `${process.env.REACT_APP_API_ROOT}/exchange-rates` || "",
         method: ApiFetchMethod.GET,
-        headers: {/*'Access-Control-Allow-Origin': `${process.env.REACT_APP_DOMAIN}`,*/ 'Content-Type': 'text/plain' }
+        headers: {'Content-Type': 'text/plain'}
       }),
   });
