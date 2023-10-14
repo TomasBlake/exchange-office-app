@@ -7,7 +7,7 @@ const app: Application = express();
 const PORT = process.env.PORT || 8000;
 
 app.get("/api", async (req: Request, res: Response) => {
-  res.send(`Express on Vercel on port ${PORT} and CNB_API: ${process.env.CNB_API}`);
+  res.send(`Express on Vercel`);
 })
 
 app.get("/api/exchange-rates", async (req: Request, res: Response) => {

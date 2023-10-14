@@ -14,32 +14,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+require('dotenv').config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 8000;
-app.get("/exchange-rates", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/api", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.send(`Express on Vercel on port ${PORT} and CNB_API: ${process.env.CNB_API}`);
+}));
+app.get("/api/exchange-rates", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // URL, na kterou budeme posílat požadavek
         const url = process.env.CNB_API || "";
-        // Odeslání HTTP požadavku a čekání na odpověď
         const response = yield (0, node_fetch_1.default)(url);
-        // Kontrola, zda je odpověď v pořádku
         if (!response.ok) {
             throw new Error("Network response was not ok: " + response.statusText);
         }
-        // Načtení dat jako textu
         const data = yield response.text();
-        // Odeslání dat jako odpověď na původní požadavek
         res.send(data);
     }
     catch (error) {
-        // Odeslání chyby, pokud něco selže
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
 }));
-// Spuštění serveru
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+module.exports = app;
