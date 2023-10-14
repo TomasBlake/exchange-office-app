@@ -1,14 +1,13 @@
 import express, { Application, Request, Response } from "express";
 import fetch from 'node-fetch';
-import dotenv from "dotenv";
 
-dotenv.config();
+require('dotenv').config();
 
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
 
 app.get("/api", async (req: Request, res: Response) => {
-  res.send(`Express on Vercel on port ${PORT}`);
+  res.send(`Express on Vercel on port ${PORT} and CNB_API: ${process.env.CNB_API}`);
 })
 
 app.get("/api/exchange-rates", async (req: Request, res: Response) => {
