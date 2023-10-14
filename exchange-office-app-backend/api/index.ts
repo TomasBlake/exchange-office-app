@@ -7,11 +7,11 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/api", async (req: Request, res: Response) => {
   res.send(`Express on Vercel on port ${PORT}`);
 })
 
-app.get("/exchange-rates", async (req: Request, res: Response) => {
+app.get("/api/exchange-rates", async (req: Request, res: Response) => {
   try {
    
     const url = process.env.CNB_API || "";
