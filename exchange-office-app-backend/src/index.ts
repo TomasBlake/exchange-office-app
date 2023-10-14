@@ -7,6 +7,10 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
 
+app.get("/", async (req: Request, res: Response) => {
+  res.send(`Express on Vercel on port ${PORT}`);
+})
+
 app.get("/exchange-rates", async (req: Request, res: Response) => {
   try {
    
@@ -28,7 +32,6 @@ app.get("/exchange-rates", async (req: Request, res: Response) => {
   }
 });
 
-// Spuštění serveru
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
