@@ -15,10 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
 require('dotenv').config();
+const cors = require('cors');
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 9000;
+app.use(cors());
 app.get("/api", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.send(`Express on Vercel on port ${PORT} and CNB_API: ${process.env.CNB_API}`);
+    res.send(`Express on Vercel`);
 }));
 app.get("/api/exchange-rates", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

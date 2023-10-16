@@ -7,15 +7,16 @@ interface Props {
 }
 
 export const CurrencyForm: React.FC<Props> = ({ data }) => {
-  const [amountOfCzk, setAmountOfCzk] = useState<number>(1);
+  const [amountOfCzk, setAmountOfCzk] = useState<number | undefined>();
   const [selectedCurrency, setSelectedCurrency] =
     useState<CurrencyDataObj | null>(null);
-  const [convertedAmounth, setConvertedAmounth] = useState<number>(0);
+  const [convertedAmounth, setConvertedAmounth] = useState<number | undefined>();
 
   const handleChangeOfCzkAmounth = (
     event: ChangeEvent<HTMLInputElement>
   ): void => {
-    setAmountOfCzk(Number(event.target.value));
+    const newValue = Number(event.target.value);
+    setAmountOfCzk(newValue === 0 ? undefined : newValue);
   };
 
   const handleChangeCurrency = (
@@ -68,7 +69,7 @@ export const CurrencyForm: React.FC<Props> = ({ data }) => {
         <Submit
           type="submit"
           value="Submit"
-          disabled={amountOfCzk <= 0 || !selectedCurrency}
+          disabled={typeof amountOfCzk === 'undefined' || amountOfCzk <= 0 || !selectedCurrency}
         />
       </FormWindow>
     </Box>
