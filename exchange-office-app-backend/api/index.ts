@@ -2,9 +2,12 @@ import express, { Application, Request, Response } from "express";
 import fetch from 'node-fetch';
 
 require('dotenv').config();
+const cors = require('cors');
 
 const app: Application = express();
 const PORT = process.env.PORT || 8000;
+
+app.use(cors());
 
 app.get("/api", async (req: Request, res: Response) => {
   res.send(`Express on Vercel`);
