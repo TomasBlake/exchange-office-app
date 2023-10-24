@@ -17,37 +17,40 @@ interface RatesProps {
 }
 
 const Rates: React.FC<RatesProps> = ({ data }) => {
+  if (!data) return <>Loading</>;
+
   return (
     <>
-    <Typography variant='h5' component='h1'>Exchange rates</Typography>
-    <TableContainer component={RatesWindow}>
-      
-      <Table aria-label="rates">
-        <TableHead>
-          <TableRow>
-            <TableCell>Country</TableCell>
-            <TableCell align="right">Currency</TableCell>
-            <TableCell align="right">Code</TableCell>
-            <TableCell align="right">Rate</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(({ country, currency, code, rate }) => (
-            <TableRow
-              key={country}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {country}
-              </TableCell>
-              <TableCell align="right">{currency}</TableCell>
-              <TableCell align="right">{code}</TableCell>
-              <TableCell align="right">{rate}</TableCell>
+      <Typography variant="h5" component="h1">
+        Exchange rates
+      </Typography>
+      <TableContainer component={RatesWindow}>
+        <Table aria-label="rates">
+          <TableHead>
+            <TableRow>
+              <TableCell>Country</TableCell>
+              <TableCell align="right">Currency</TableCell>
+              <TableCell align="right">Code</TableCell>
+              <TableCell align="right">Rate</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.map(({ country, currency, code, rate }) => (
+              <TableRow
+                key={country}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {country}
+                </TableCell>
+                <TableCell align="right">{currency}</TableCell>
+                <TableCell align="right">{code}</TableCell>
+                <TableCell align="right">{rate}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 };

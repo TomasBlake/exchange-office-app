@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { CurrencyDataObj } from "../utils/stringToObjectParser";
 import { useForm } from "react-hook-form";
-import {
-  Button,
-  Typography,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -34,7 +31,7 @@ const CurrencyForm: React.FC<Props> = ({ data }) => {
     reValidateMode: "onChange",
     defaultValues: {
       amountOfCzk: 0,
-      selectedCurrency: ""
+      selectedCurrency: "",
     },
     resolver: yupResolver(formValidation),
   });
@@ -43,9 +40,11 @@ const CurrencyForm: React.FC<Props> = ({ data }) => {
   const selectedCurrency = watch("selectedCurrency");
 
   const handleConvertCurrency = (formData: FormData) => {
-    const currency = data.find(curr => curr.code === formData.selectedCurrency)
+    const currency = data.find(
+      (curr) => curr.code === formData.selectedCurrency
+    );
     if (!currency) return;
-    const converted = formData.amountOfCzk * Number(currency?.rate);
+    const converted = formData.amountOfCzk / Number(currency?.rate);
     setConvertedAmounth(converted);
     setSelectedCurrencyCode(currency?.code);
   };
@@ -54,76 +53,74 @@ const CurrencyForm: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-    <Typography variant='h5' component='h1' gutterBottom>
+      <Typography variant="h5" component="h1" gutterBottom>
         Currency convertor
       </Typography>
-    <StyledPaper elevation={2}>
-      
-      <StyledBox>
-        <FormWindow onSubmit={onSubmit}>
-          <NumberInput<FormData>
-            control={control}
-            name="amountOfCzk"
-            label="Amount of CZK"
-            fullWidth
-            errors={errors}
-          />
-          <Select<FormData, CurrencyDataObj>
-            control={control}
-            name="selectedCurrency"
-            label="Select Currency"
-            mapProp="code"
-            fullWidth
-            errors={errors}
-            items={data}
-          />
+      <StyledPaper elevation={2}>
+        <StyledBox>
+          <FormWindow onSubmit={onSubmit}>
+            <NumberInput<FormData>
+              control={control}
+              name="amountOfCzk"
+              label="Amount of CZK"
+              fullWidth
+              errors={errors}
+            />
+            <Select<FormData, CurrencyDataObj>
+              control={control}
+              name="selectedCurrency"
+              label="Select Currency"
+              mapProp="code"
+              fullWidth
+              errors={errors}
+              items={data}
+            />
 
-          <Button
-            variant="contained"
-            type="submit"
-            value="Submit"
-            disabled={
-              typeof amountOfCzk === "undefined" ||
-              amountOfCzk <= 0 ||
-              !selectedCurrency
-            }
-          >
-            Submit
-          </Button>
-        </FormWindow>
-        <ConvertedCurrencyPaper elevation={1}>
-          <Typography variant="body1">
-            {`Amount entered in CZK converted into ${
-              selectedCurrencyCode
-                ? selectedCurrencyCode
-                : "the selected currency"
-            }:`}
-          </Typography>
-          {convertedAmounth && selectedCurrencyCode && (
-            <Typography variant="h3" gutterBottom>
-              {`${convertedAmounth.toFixed(2)} ${selectedCurrencyCode}`}
+            <Button
+              variant="contained"
+              type="submit"
+              value="Submit"
+              disabled={
+                typeof amountOfCzk === "undefined" ||
+                amountOfCzk <= 0 ||
+                !selectedCurrency
+              }
+            >
+              Submit
+            </Button>
+          </FormWindow>
+          <ConvertedCurrencyPaper elevation={1}>
+            <Typography variant="body1">
+              {`Amount entered in CZK converted into ${
+                selectedCurrencyCode
+                  ? selectedCurrencyCode
+                  : "the selected currency"
+              }:`}
             </Typography>
-          )}
-        </ConvertedCurrencyPaper>
-      </StyledBox>
-    </StyledPaper>
+            {convertedAmounth && selectedCurrencyCode && (
+              <Typography variant="h3" gutterBottom>
+                {`${convertedAmounth.toFixed(2)} ${selectedCurrencyCode}`}
+              </Typography>
+            )}
+          </ConvertedCurrencyPaper>
+        </StyledBox>
+      </StyledPaper>
     </>
   );
 };
 
 export default CurrencyForm;
 
-
 const ConvertedCurrencyPaper = styled(Paper)`
-display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
-padding: 20px;
-margin-left: 20px;
-background-color: papayawhip;
-hight: 100%;
-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-left: 20px;
+  background-color: papayawhip;
+  hight: 100%;
+  width: 100%;
 `;
 
 const StyledPaper = styled(Paper)`
