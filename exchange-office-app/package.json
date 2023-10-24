@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fontsource/roboto": "^5.0.8",
     "@hookform/resolvers": "^3.3.2",
     "@mui/icons-material": "^5.14.14",
@@ -54,7 +55,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-router-dom": "^5.3.3",
     "@types/yup": "^0.32.0"
   }
