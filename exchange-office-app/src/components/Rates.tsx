@@ -17,7 +17,6 @@ interface RatesProps {
 }
 
 const Rates: React.FC<RatesProps> = ({ data }) => {
-  if (!data) return <>Loading</>;
 
   return (
     <>
